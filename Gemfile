@@ -73,3 +73,4 @@ end
 
 gem 'pry-rails'
 gem 'webpacker'
+gem 'devise'
