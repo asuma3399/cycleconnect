@@ -1,0 +1,137 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: fade 12s infinite;
+}
+
+.hero .background-image:nth-child(1) {
+  background-image: url('/assets/hero1.jpg');
+  animation-delay: 0s;
+}
+
+.hero .background-image:nth-child(2) {
+  background-image: url('/assets/hero2.jpg');
+  animation-delay: 4s;
+}
+
+.hero .background-image:nth-child(3) {
+  background-image: url('/assets/hero3.jpg');
+  animation-delay: 8s;
+}
+
+@keyframes fade {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  50% { opacity: 0; }
+  75% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background: #f4f4f4;
+}
+
+.hero .title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  position: relative;
+  z-index: 1;
+  margin: 0 0.5rem; /* ボタン間のマージンを追加 */
+}
+
+.btn-primary {
+  background: #ff6f61;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #ff3b2f;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #ff6f61;
+  border: 2px solid #ff6f61;
+}
+
+.btn-secondary:hover {
+  background: #ff6f61;
+  color: #fff;
+}
+
+.features {
+  padding: 4rem 0;
+  background: #fff;
+}
+
+.features .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.feature {
+  text-align: center;
+  padding: 1rem;
+  max-width: 200px;
+}
+
+.feature .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ff6f61;
+}
+
+.feature h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
+}
