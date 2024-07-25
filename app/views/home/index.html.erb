@@ -6,6 +6,7 @@
   <title>CycleConnect</title>
   <%= stylesheet_link_tag 'home', media: 'all' %>
 </head>
+
 <body>
   <header class="hero">
     <div class="background-image"></div>
@@ -15,9 +16,9 @@
       <h1 class="title">Welcome to CycleConnect</h1>
       <p class="subtitle">Connect, Share, and Ride with Fellow Cyclists</p>
       <div class="button-container">
-        <%= link_to 'Get Started', '#', class: 'btn btn-primary' %>
-        <%= link_to 'Log In', '#', class: 'btn btn-secondary' %>
-      </div>
+        <%= link_to 'Get Started', new_user_registration_path, class: 'btn top-btn-primary' %>
+        <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary' %>
+      </div>_path
     </div>
   </header>
 
@@ -46,10 +47,6 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2024 CycleConnect. All rights reserved.</p>
-    </div>
-  </footer>
+
 </body>
 </html>

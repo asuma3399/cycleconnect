@@ -1,0 +1,70 @@
+/* 基本的なページの背景とレイアウト */
+body.devise-form-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* フォームコンテナのスタイリング */
+.form-container {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+}
+
+/* タイトルのスタイリング */
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ラベルと入力フィールドのスタイリング */
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* ボタンのスタイリング */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #2575fc;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1956d1;
+}
+
+/* リンクとその他の要素のスタイリング */
+.form-container a {
+  color: #2575fc;
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
