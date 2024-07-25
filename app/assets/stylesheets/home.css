@@ -96,6 +96,27 @@ body {
   color: #fff;
 }
 
+.btn {
+  padding: 0.8rem 2rem;  /* ボタンのパディング */
+  text-decoration: none;
+  color: #fff;  /* テキスト色 */
+  background-color: #007bff;  /* バックグラウンド色 */
+  border: none;
+  border-radius: 5px;  /* 角の丸み */
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;  /* ボタン間のスペースを調整 */
+}
+
+.btn-secondary {
+  background-color: #6c757d;  /* セカンダリボタンの色を調整 */
+}
+
 .features {
   padding: 4rem 0;
   background: #fff;
@@ -111,6 +132,11 @@ body {
   text-align: center;
   padding: 1rem;
   max-width: 200px;
+  border: 2px solid #ccc;  /* 枠線の色と太さ */
+  margin: 20px;  /* 各要素の間隔 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* 軽い影を追加して立体感を出す */
+  border-radius: 8px;  /* 角の丸みを設定 */
+  background-color: #fff;  /* 背景色 */
 }
 
 .feature .icon {
