@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="profile-container">
+    <h1>Profile</h1>
+    <div class="profile-icon">
+      <% if @user.icon.attached? %>
+        <%= image_tag @user.icon, size: "150x150" %>
+      <% else %>
+        <%= image_tag 'default_user_icon.png', size: "150x150" %>
+      <% end %>
+    </div>
+    <p><strong>Username:</strong> <%= @user.username %></p>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+    <p><strong>Bio:</strong> <%= @user.bio %></p>
+    
+    <h2>Recent Posts</h2>
+    <ul>
+      <% @user.posts.limit(5).each do |post| %>
+        <li><%= link_to post.description.truncate(50), post_path(post) %></li>
+      <% end %>
+    </ul>
+    
+    <h2>Upcoming Events</h2>
+    <ul>
+      <% @user.events.where('date >= ?', Date.today).limit(5).each do |event| %>
+        <li><%= link_to event.title, chat_room_event_path(event.chat_room, event) %> - <%= event.date.strftime("%Y-%m-%d") %></li>
+      <% end %>
+    </ul>
+
+    <%= link_to 'Edit Profile', edit_profile_path, class: 'btn btn-primary' %>
+  </div>
+</body>
+</html>

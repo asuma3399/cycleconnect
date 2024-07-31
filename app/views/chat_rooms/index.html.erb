@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Rooms</title>
+  <%= stylesheet_link_tag 'chat_rooms', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-list">
+      <h2>Chat Rooms</h2>
+      <ul>
+        <% @chat_rooms.each do |chat_room| %>
+          <li>
+            <%= link_to chat_room_path(chat_room) do %>
+              <div class="chat-room-name"><%= chat_room.name %></div>
+              <div class="chat-room-users">
+                <%= chat_room.users.map(&:username).join(", ") %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <%= link_to 'Create Chat Room', new_chat_room_path, class: 'btn btn-primary create-chat-room' %>
+    </div>
+  </div>
+</body>
+</html>

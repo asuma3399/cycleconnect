@@ -3,24 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Gallery</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Post Gallery</title>
+  <%= stylesheet_link_tag 'post', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <div class="container">
-    <h1>Photo Gallery</h1>
-    <div class="photo-grid">
-      <!-- 写真が登録されていない場合のプレースホルダー -->
-      <div class="photo-item">
-        <img src="placeholder.jpg" alt="No photo uploaded yet">
-      </div>
-      <!-- 実際の写真データをループで表示 -->
-      <% @posts.each do |post| %>
-        <div class="photo-item">
-          <img src="<%= post.image_url %>" alt="<%= post.description %>">
-        </div>
+    <h1>Post Gallery</h1>
+    <div class="new-post-button-container">
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+    </div>
+    <div class="post-grid">
+      <% if @posts.blank? %>
+        <!-- 何も表示しない、またはここに適切なメッセージを表示することも可能 -->
+      <% else %>
+        <% @posts.each do |post| %>
+          <div class="post-item">
+            <div class="user-info">
+              <% if post.user.icon.attached? %>
+                <%= image_tag post.user.icon, class: 'user-icon' %>
+              <% else %>
+                <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
+              <% end %>
+              <span class="user-name"><%= post.user.username %></span>
+            </div>
+            <%= link_to post_path(post) do %>
+              <% if post.image.attached? %>
+                <img src="<%= url_for(post.image) %>" alt="<%= post.description %>">
+              <% else %>
+                <img src="placeholder.jpg" alt="No image available">
+              <% end %>
+              <div class="post-info">
+                <span class="post-description"><%= post.description %></span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
+  <%= render 'layouts/footer' %>
 </body>
 </html>

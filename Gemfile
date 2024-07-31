@@ -74,3 +74,6 @@ end
 gem 'pry-rails'
 gem 'webpacker'
 gem 'devise'
+gem 'exifr'
+gem 'image_processing'
+gem 'rails-ujs'
