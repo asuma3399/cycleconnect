@@ -117,6 +117,7 @@ body {
   background: #f4f4f4;
   color: #333;
   padding: 20px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
 }
 
 .form-container {
@@ -154,8 +155,8 @@ h1 {
   box-sizing: border-box;
 }
 /* ボタンスタイリング */
-.btn-primary {
-  width: 100%;
+.post-submit-button {
+  width: 100px;
   padding: 10px;
   background-color: #007bff;
   color: white;
@@ -164,8 +165,9 @@ h1 {
   cursor: pointer;
   display: block;
   margin-top: 20px;
+  text-align: center;
 }
 
-.btn-primary:hover {
+.post-submit-button:hover {
   background-color: #0056b3;
 }

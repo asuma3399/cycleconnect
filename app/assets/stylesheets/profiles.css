@@ -108,8 +108,17 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS */
+
+body {
+  margin-top: 60px; /* 上の空白を50pxに指定 */
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+}
 
 .profile-container {
   max-width: 800px;
@@ -137,4 +146,40 @@ meter {
 
 .profile-icon img {
   border-radius: 50%;
+}
+
+.edit-profile-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-profile-btn:hover {
+  background-color: #0056b3;
+}
+
+.profile-edit-save-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.profile-edit-save-btn:hover {
+  background-color: #0056b3;
 }

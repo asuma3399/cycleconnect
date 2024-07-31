@@ -1,16 +1,15 @@
-<!-- app/views/devise/sessions/new.html.erb -->
 <%= stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload' %>
 <body class="devise-form-page">
-  <div class="form-container">
+  <div class="devise-form-container">
     <h2>Log in</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-field" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-input-field" %>
       </div>
       <div class="field">
         <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password", class: "input-field" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "devise-input-field" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -21,7 +20,7 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "Log in", class: "btn btn-primary" %>
+        <%= f.submit "Log in", class: "devise-btn-primary" %>
       </div>
     <% end %>
 
