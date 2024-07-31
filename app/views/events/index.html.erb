@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event List</title>
+  <%= stylesheet_link_tag 'events', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="event-list-container">
+    <h1>Events in <%= @chat_room.name %></h1>
+    <ul>
+      <% @events.each do |event| %>
+        <li>
+          <%= link_to event.title, chat_room_event_path(@chat_room, event) %> - <%= event.date.strftime("%Y-%m-%d") %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to 'Create Event', new_chat_room_event_path(@chat_room), class: 'btn btn-primary' %>
+  </div>
+</body>
+</html>

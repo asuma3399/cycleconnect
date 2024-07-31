@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+  <%= stylesheet_link_tag 'events', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Create Event</h1>
+    <%= form_with model: [@chat_room, @event], local: true do |f| %>
+      <div class="field">
+        <%= f.label :title, "Event Title" %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :description, "Description" %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :date, "Date" %>
+        <%= f.date_field :date, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :garmin_url, "Garmin Connect Course URL" %>
+        <%= f.text_field :garmin_url, class: 'form-control' %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Create Event", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>

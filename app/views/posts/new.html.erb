@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Post</title>
+  <link rel="stylesheet" href="styles.css">
+  <%= stylesheet_link_tag 'post_form', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Create New Post</h1>
+    <%= form_with model: @post, local: true do |f| %>
+      <div class="field">
+        <%= f.label :description, "Description" %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :image, "Image" %>
+        <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :latitude, "Latitude" %>
+        <%= f.text_field :latitude, class: 'form-control', id: 'latitude' %>
+      </div>
+      <div class="field">
+        <%= f.label :longitude, "Longitude" %>
+        <%= f.text_field :longitude, class: 'form-control', id: 'longitude' %>
+      </div>
+      <div id="map" style="height: 400px;"></div>
+      <div class="actions">
+        <%= f.submit "Submit", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var map = L.map('map').setView([35.681236, 139.767125], 13); // 東京駅の緯度経度
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      var marker;
+
+      map.on('click', function(e) {
+        var coord = e.latlng;
+        var lat = coord.lat;
+        var lng = coord.lng;
+        if (marker) {
+          map.removeLayer(marker);
+        }
+        marker = L.marker([lat, lng]).addTo(map);
+        
+        document.getElementById('latitude').value = lat.toFixed(6);
+        document.getElementById('longitude').value = lng.toFixed(6);
+      });
+
+      document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          EXIF.getData(file, function() {
+            const lat = EXIF.getTag(this, 'GPSLatitude');
+            const lon = EXIF.getTag(this, 'GPSLongitude');
+            if (lat && lon) {
+              const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
+              const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
+              document.getElementById('latitude').value = latitude.toFixed(6);
+              document.getElementById('longitude').value = longitude.toFixed(6);
+              map.setView([latitude, longitude], 13);
+              if (marker) {
+                map.removeLayer(marker);
+              }
+              marker = L.marker([latitude, longitude]).addTo(map);
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

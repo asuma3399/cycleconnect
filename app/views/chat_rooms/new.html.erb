@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Chat Room</title>
+  <link rel="stylesheet" href="styles.css">
+  <%= stylesheet_link_tag 'chat_rooms', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Create Chat Room</h1>
+    <%= form_with model: @chat_room, local: true do |f| %>
+      <div class="field">
+        <%= f.label :name, "Chat Room Name" %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :user_ids, "Select Users" %>
+        <%= f.collection_select :user_ids, @users, :id, :username, {}, { multiple: true, class: 'form-control' } %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Create", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>
