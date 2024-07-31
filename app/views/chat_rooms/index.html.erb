@@ -8,22 +8,27 @@
 </head>
 <body>
   <div class="chat-container">
+    <h2>Chat Rooms</h2>
     <div class="chat-list">
-      <h2>Chat Rooms</h2>
       <ul>
         <% @chat_rooms.each do |chat_room| %>
           <li>
-            <%= link_to chat_room_path(chat_room) do %>
-              <div class="chat-room-name"><%= chat_room.name %></div>
-              <div class="chat-room-users">
-                <%= chat_room.users.map(&:username).join(", ") %>
-              </div>
-            <% end %>
+            <%= link_to chat_room.name, chat_room_path(chat_room), class: 'chat-room-link' %>
+            <div class="user-list">
+              <% chat_room.users.each do |user| %>
+                <% if user.icon.attached? %>
+                  <%= image_tag user.icon, class: 'user-icon' %>
+                <% else %>
+                  <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
+                <% end %>
+                <span class="user-name"><%= user.username %></span>
+              <% end %>
+            </div>
           </li>
         <% end %>
       </ul>
-      <%= link_to 'Create Chat Room', new_chat_room_path, class: 'btn btn-primary create-chat-room' %>
     </div>
+    <%= link_to 'Create Chat Room', new_chat_room_path, class: 'create-chat-room-btn' %>
   </div>
 </body>
 </html>

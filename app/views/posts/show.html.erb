@@ -49,6 +49,9 @@
           <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
         </div>
       <% end %>
+      <div id="like-btn<%= @post.id %>">
+        <%= render partial: "likes/like", locals: { post: @post } %>
+      </div>
     </div>
 
     <!-- 削除ボタンの追加 -->
