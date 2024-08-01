@@ -72,7 +72,7 @@ group :test do
 end
 
 gem 'pry-rails'
-gem 'webpacker'
+gem 'webpacker',    '~> 5.0'
 gem 'devise'
 gem 'exifr'
 gem 'mini_magick'
