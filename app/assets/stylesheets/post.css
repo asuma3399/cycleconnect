@@ -1,14 +1,7 @@
-/***
-    The new CSS reset - version 1.11.2 (last updated 15.11.2023)
-    GitHub page: https://github.com/elad2412/the-new-css-reset
-***/
+/*** The new CSS reset - version 1.11.2 (last updated 15.11.2023) GitHub page: https://github.com/elad2412/the-new-css-reset ***/
 
-/*
-    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
-    - The "symbol *" part is to solve Firefox SVG sprite bug
-    - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
- */
- *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property - The "symbol *" part is to solve Firefox SVG sprite bug - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36) */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
   all: unset;
   display: revert;
 }
@@ -75,15 +68,12 @@ meter {
   color: unset;
 }
 
-/* fix the feature of 'hidden' attribute.
- display:revert; revert to element instead of attribute */
+/* fix the feature of 'hidden' attribute. display:revert; revert to element instead of attribute */
 :where([hidden]) {
   display: none;
 }
 
-/* revert for bug in Chromium browsers
- - fix for the content editable attribute will work properly.
- - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+/* revert for bug in Chromium browsers - fix for the content editable attribute will work properly. - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
 :where([contenteditable]:not([contenteditable="false"])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -113,15 +103,15 @@ body {
   font-family: 'Arial', sans-serif;
   background: #f4f4f4;
   color: #333;
-  padding: 0px 20px 20px 20px;
-  margin-top: 56px; /* 上の空白を50pxに指定 */
+  padding-top: 60px;
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
 }
 
 .container {
+  flex: 1;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: auto;
   padding: 20px;
   background: white;
   border-radius: 8px;

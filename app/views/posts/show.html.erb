@@ -6,9 +6,24 @@
   <title>Post Details</title>
   <%= stylesheet_link_tag 'post_show', media: 'all', 'data-turbolinks-track': 'reload' %>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <div class="post-details">
+
+      <div class="user-info">
+        <div class="user-icon">
+          <% if @post.user.icon.attached? %>
+            <%= image_tag @post.user.icon, class: 'user-icon-img' %>
+          <% else %>
+            <%= image_tag 'default_user_icon.png', class: 'user-icon-img' %>
+          <% end %>
+        </div>
+        <div class="user-name">
+          <span class="user-name"><%= @post.user.username %></span>
+        </div>
+      </div>
+
     <div class="image-container">
       <% if @post.image.attached? %>
         <img src="<%= url_for(@post.image) %>" alt="<%= @post.description %>" style="width: 100%; max-height: 500px; object-fit: cover;">
@@ -21,6 +36,10 @@
       <div id="map" data-latitude="<%= @post.latitude %>" data-longitude="<%= @post.longitude %>" style="height: 400px;"></div>
     </div>
     
+    <div id="like-btn<%= @post.id %>", class="like-btn">
+      <%= render partial: "likes/like", locals: { post: @post } %>
+    </div>
+
     <!-- コメント一覧の追加 -->
     <% if @post.comments.any? %>
       <div class="comments-section">
@@ -35,7 +54,7 @@
         <% end %>
       </div>
     <% end %>
-
+    
     <!-- コメントフォームの追加 -->
     <div class="comment-form">
       <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
@@ -49,16 +68,16 @@
           <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
         </div>
       <% end %>
-      <div id="like-btn<%= @post.id %>">
-        <%= render partial: "likes/like", locals: { post: @post } %>
-      </div>
     </div>
 
     <!-- 削除ボタンの追加 -->
-    <div class="actions" style="margin-top: 20px;">
-      <%= link_to 'Delete Post', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+    <% if user_signed_in? && current_user.id == @post.user.id %>
+      <div class="actions" style="margin-top: 20px;">
+        <%= link_to 'Delete Post', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
     </div>
-  </div>
+
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>

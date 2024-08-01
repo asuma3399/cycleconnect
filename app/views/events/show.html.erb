@@ -4,36 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Details</title>
-  <%= stylesheet_link_tag 'events', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'event_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <div class="event-details-container">
     <h1><%= @event.title %></h1>
     <p><strong>Date:</strong> <%= @event.date.strftime("%Y-%m-%d") %></p>
     <p><strong>Description:</strong> <%= @event.description %></p>
-    <!-- Garmin URLリンクの追加 -->
     <% if @event.garmin_url.present? %>
       <p><strong>Garmin URL:</strong> <%= link_to @event.garmin_url, @event.garmin_url, target: "_blank" %></p>
     <% end %>
     <p><strong>Participants:</strong> <%= @participants.count %></p>
   
-    <!-- 参加者リストの表示 -->
     <h3>Participants</h3>
-    <ul>
+    <ul class="participant-list">
       <% @participants.each do |participant| %>
-        <li><%= participant.username %></li>
+        <li class="participant-item">
+          <% if participant.icon.attached? %>
+            <%= image_tag participant.icon, class: 'participant-icon' %>
+          <% else %>
+            <%= image_tag 'default_user_icon.png', class: 'participant-icon' %>
+          <% end %>
+          <%= participant.username %>
+        </li>
       <% end %>
     </ul>
 
-    <!-- 不参加者リストの表示 -->
     <h3>Non-Participants</h3>
-    <ul>
+    <ul class="non-participant-list">
       <% @non_participants.each do |non_participant| %>
-        <li><%= non_participant.username %></li>
+        <li class="non-participant-item">
+          <% if non_participant.icon.attached? %>
+            <%= image_tag non_participant.icon, class: 'participant-icon' %>
+          <% else %>
+            <%= image_tag 'default_user_icon.png', class: 'participant-icon' %>
+          <% end %>
+          <%= non_participant.username %>
+        </li>
       <% end %>
     </ul>
 
-    <!-- 参加・不参加ボタンの追加 -->
     <%= button_to '参加する', participate_chat_room_event_path(@chat_room, @event), method: :post, class: 'btn btn-primary' %>
     <%= button_to '不参加', unparticipate_chat_room_event_path(@chat_room, @event), method: :delete, class: 'btn btn-danger' %>
   </div>

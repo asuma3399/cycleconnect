@@ -1,15 +1,7 @@
-/* リセットCSS */
-/***
-    The new CSS reset - version 1.11.2 (last updated 15.11.2023)
-    GitHub page: https://github.com/elad2412/the-new-css-reset
-***/
+/*** The new CSS reset - version 1.11.2 (last updated 15.11.2023) GitHub page: https://github.com/elad2412/the-new-css-reset ***/
 
-/*
-    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
-    - The "symbol *" part is to solve Firefox SVG sprite bug
-    - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
- */
- *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property - The "symbol *" part is to solve Firefox SVG sprite bug - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36) */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
   all: unset;
   display: revert;
 }
@@ -76,15 +68,12 @@ meter {
   color: unset;
 }
 
-/* fix the feature of 'hidden' attribute.
- display:revert; revert to element instead of attribute */
+/* fix the feature of 'hidden' attribute. display:revert; revert to element instead of attribute */
 :where([hidden]) {
   display: none;
 }
 
-/* revert for bug in Chromium browsers
- - fix for the content editable attribute will work properly.
- - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+/* revert for bug in Chromium browsers - fix for the content editable attribute will work properly. - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
 :where([contenteditable]:not([contenteditable="false"])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -108,14 +97,13 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS */
 
 body {
   font-family: 'Arial', sans-serif;
-  background: #f4f4f4;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   color: #333;
-  padding: 20px;
+  padding-top: 60px;
   margin: 0;
 }
 
@@ -124,9 +112,26 @@ body {
   width: 100%;
   max-width: 800px;
   padding: 20px;
-  margin: 30px auto;
+  margin: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.user-icon-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .image-container {
@@ -143,6 +148,8 @@ body {
   max-width: 100%;
   max-height: 100%;
   height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .map-container {
@@ -182,34 +189,6 @@ body {
   .image-container {
     max-height: 300px;
   }
-}
-
-.post-details {
-  background: white;
-  width: 100%;
-  max-width: 800px;
-  padding: 20px;
-  margin: 30px auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.image-container {
-  width: 100%;
-  max-height: 500px;
-  overflow: hidden;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container img {
-  max-width: 100%;
-  max-height: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .map-container {
@@ -331,3 +310,22 @@ body {
 .comment-form .btn-primary:hover {
   background-color: #0056b3;
 }
+
+.like-btn {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post_likes {
+  color: #ff0000; /* ハートの色 */
+  text-decoration: none;
+  font-size: 1.5em; /* アイコンのサイズ */
+  display: inline-flex;
+  align-items: center;
+}
+
+.post_likes .fa-heart {
+  margin-right: 5px; /* テキストとの間隔 */
+}
+

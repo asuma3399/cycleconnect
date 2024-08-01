@@ -1,15 +1,7 @@
-/* リセットCSS */
-/***
-    The new CSS reset - version 1.11.2 (last updated 15.11.2023)
-    GitHub page: https://github.com/elad2412/the-new-css-reset
-***/
+/*** The new CSS reset - version 1.11.2 (last updated 15.11.2023) GitHub page: https://github.com/elad2412/the-new-css-reset ***/
 
-/*
-    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
-    - The "symbol *" part is to solve Firefox SVG sprite bug
-    - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
- */
- *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property - The "symbol *" part is to solve Firefox SVG sprite bug - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36) */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
   all: unset;
   display: revert;
 }
@@ -76,15 +68,12 @@ meter {
   color: unset;
 }
 
-/* fix the feature of 'hidden' attribute.
- display:revert; revert to element instead of attribute */
+/* fix the feature of 'hidden' attribute. display:revert; revert to element instead of attribute */
 :where([hidden]) {
   display: none;
 }
 
-/* revert for bug in Chromium browsers
- - fix for the content editable attribute will work properly.
- - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+/* revert for bug in Chromium browsers - fix for the content editable attribute will work properly. - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
 :where([contenteditable]:not([contenteditable="false"])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -108,16 +97,29 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS */
 
-/* ヘッダーの基本スタイル */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .main-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 56;
+  height: 56px;
   z-index: 1000;
   background-color: #333;
   color: white;
@@ -154,12 +156,15 @@ meter {
 }
 
 .footer-container {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   background-color: #333;
   color: white;
   text-align: center;
   padding: 10px 0;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
   width: 100%;
 }

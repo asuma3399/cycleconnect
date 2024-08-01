@@ -7,44 +7,45 @@
   <%= stylesheet_link_tag 'post', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <div class="container">
-    <h1>Post Gallery</h1>
-    <div class="new-post-button-container">
-      <%= link_to 'New Post', new_post_path, class: 'new-post-button' %>
-    </div>
-    <div class="post-grid">
-      <% if @posts.blank? %>
-        <!-- 何も表示しない、またはここに適切なメッセージを表示することも可能 -->
-      <% else %>
-        <% @posts.each do |post| %>
-          <div class="post-item">
-            <div class="user-info">
-              <div class="user-icon">
-                <% if post.user.icon.attached? %>
-                  <%= image_tag post.user.icon, class: 'user-icon-img' %>
+  <div class="wrapper">
+    <div class="container">
+      <h1>Post Gallery</h1>
+      <div class="new-post-button-container">
+        <%= link_to 'New Post', new_post_path, class: 'new-post-button' %>
+      </div>
+      <div class="post-grid">
+        <% if @posts.blank? %>
+          <!-- 何も表示しない、またはここに適切なメッセージを表示することも可能 -->
+        <% else %>
+          <% @posts.each do |post| %>
+            <div class="post-item">
+              <div class="user-info">
+                <div class="user-icon">
+                  <% if post.user.icon.attached? %>
+                    <%= image_tag post.user.icon, class: 'user-icon-img' %>
+                  <% else %>
+                    <%= image_tag 'default_user_icon.png', class: 'user-icon-img' %>
+                  <% end %>
+                </div>
+                <div class="user-name">
+                  <span class="user-name"><%= post.user.username %></span>
+                </div>
+              </div>
+              <%= link_to post_path(post) do %>
+                <% if post.image.attached? %>
+                  <img src="<%= url_for(post.image) %>" alt="<%= post.description %>">
                 <% else %>
-                  <%= image_tag 'default_user_icon.png', class: 'user-icon-img' %>
+                  <img src="placeholder.jpg" alt="No image available">
                 <% end %>
-              </div>
-              <div class="user-name">
-              <span class="user-name"><%= post.user.username %></span>
-              </div>
-            </div>
-            <%= link_to post_path(post) do %>
-              <% if post.image.attached? %>
-                <img src="<%= url_for(post.image) %>" alt="<%= post.description %>">
-              <% else %>
-                <img src="placeholder.jpg" alt="No image available">
+                <div class="post-info">
+                  <span class="post-description"><%= post.description %></span>
+                </div>
               <% end %>
-              <div class="post-info">
-                <span class="post-description"><%= post.description %></span>
-              </div>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
-  <%= render 'layouts/footer' %>
 </body>
 </html>

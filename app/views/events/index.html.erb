@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event List</title>
-  <%= stylesheet_link_tag 'events', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'event_index', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <div class="event-list-container">
     <h1>Events in <%= @chat_room.name %></h1>
-    <ul>
+    <ul class="event-list">
       <% @events.each do |event| %>
-        <li>
-          <%= link_to event.title, chat_room_event_path(@chat_room, event) %> - <%= event.date.strftime("%Y-%m-%d") %>
+        <li class="event-item">
+          <%= link_to chat_room_event_path(@chat_room, event), class: 'event-link' do %>
+            <span class="event-title"><%= event.title %></span>
+            <span class="event-date"><%= event.date.strftime("%Y-%m-%d") %></span>
+          <% end %>
         </li>
       <% end %>
     </ul>
-    <%= link_to 'Create Event', new_chat_room_event_path(@chat_room), class: 'btn btn-primary' %>
+    <div class="create-event-btn-container">
+      <%= link_to 'Create Event', new_chat_room_event_path(@chat_room), class: 'create-event-btn' %>
+    </div>
   </div>
 </body>
 </html>

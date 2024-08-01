@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
     t.string "latitude", null: false
     t.string "longitude", null: false
     t.text "description", null: false
+    t.integer "likes_count", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

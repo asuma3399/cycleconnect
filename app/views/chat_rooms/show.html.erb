@@ -5,18 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= @chat_room.name %></title>
   <link rel="stylesheet" href="styles.css">
-  <%= stylesheet_link_tag 'chat_rooms', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'chat_room_details', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-header">
+  <div class="chat-room-details-container">
+    <div class="chat-room-header">
       <h2><%= @chat_room.name %></h2>
-      <p>Users in this chat room:</p>
-      <ul>
-        <% @chat_room.users.each do |user| %>
-          <li><%= user.username %></li>
-        <% end %>
-      </ul>
+        <div class="user-info">
+          <ul>
+            <% @chat_room.users.each do |user| %>
+              <% if user.icon.attached? %>
+                <%= image_tag user.icon, class: 'user-icon' %>
+              <% else %>
+                <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
+              <% end %>
+              <span class="user-name"><%= user.username %></span>
+            <% end %>
+          </ul>
+        </div>
       <%= link_to 'Event', chat_room_events_path(@chat_room), class: 'btn btn-secondary' %> <!-- Eventボタン追加 -->
     </div>
     <div class="messages">

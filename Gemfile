@@ -78,3 +78,6 @@ gem 'exifr'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'rails-ujs'
+group :production do
+  gem 'pg'
+end

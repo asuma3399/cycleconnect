@@ -6,46 +6,46 @@
   <title>CycleConnect</title>
   <%= stylesheet_link_tag 'home', media: 'all' %>
 </head>
-
 <body>
-  <header class="hero">
-    <div class="background-image"></div>
-    <div class="background-image"></div>
-    <div class="background-image"></div>
-    <div class="container">
-      <h1 class="title">Welcome to CycleConnect</h1>
-      <p class="subtitle">Connect, Share, and Ride with Fellow Cyclists</p>
-      <div class="button-container">
-        <%= link_to 'Get Started', new_user_registration_path, class: 'btn top-btn-primary' %>
-        <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary' %>
-      </div>_path
-    </div>
-  </header>
 
-  <section class="features">
-    <div class="container">
-      <div class="feature">
-        <i class="icon fa fa-user"></i>
-        <h2>User Profiles</h2>
-        <p>Manage your profile and connect with other cyclists.</p>
-      </div>
-      <div class="feature">
-        <i class="icon fa fa-camera"></i>
-        <h2>Photo Sharing</h2>
-        <p>Share your cycling moments with photos and maps.</p>
-      </div>
-      <div class="feature">
-        <i class="icon fa fa-comments"></i>
-        <h2>Chat</h2>
-        <p>Chat with multiple users in real-time.</p>
-      </div>
-      <div class="feature">
-        <i class="icon fa fa-calendar"></i>
-        <h2>Events</h2>
-        <p>Join and create cycling events.</p>
-      </div>
+<header class="hero">
+  <div class="background-image"></div>
+  <div class="background-image"></div>
+  <div class="background-image"></div>
+  <div class="container">
+    <h1 class="title">Welcome to CycleConnect</h1>
+    <p class="subtitle">Connect, Share, and Ride with Fellow Cyclists</p>
+    <div class="button-container">
+      <%= link_to 'Get Started', new_user_registration_path, class: 'btn top-btn-primary' %>
+      <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary' %>
     </div>
-  </section>
-<%= render 'layouts/footer' %>
+  </div>
+</header>
+
+<div class="features">
+  <div class="container">
+    <div class="feature">
+      <i class="icon fa fa-user"></i>
+      <h2>User Profiles</h2>
+      <p>Manage your profile and connect with other cyclists.</p>
+    </div>
+    <div class="feature">
+      <i class="icon fa fa-camera"></i>
+      <h2>Photo Sharing</h2>
+      <p>Share your cycling moments with photos and maps.</p>
+    </div>
+    <div class="feature">
+      <i class="icon fa fa-comments"></i>
+      <h2>Chat</h2>
+      <p>Chat with multiple users in real-time.</p>
+    </div>
+    <div class="feature">
+      <i class="icon fa fa-calendar"></i>
+      <h2>Events</h2>
+      <p>Join and create cycling events.</p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
