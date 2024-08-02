@@ -6,7 +6,6 @@
   "scripts": {
     "build": "webpack"
     "start": "webpack serve --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
   },
   "author": "Your Name",
   "license": "MIT",
