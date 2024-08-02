@@ -4,6 +4,7 @@
   "description": "A sample project",
   "main": "index.js",
   "scripts": {
+    "build": "webpack"
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js"
   },
