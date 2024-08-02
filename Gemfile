@@ -72,7 +72,6 @@ group :test do
 end
 
 gem 'pry-rails'
-gem 'webpacker',    '~> 5.0'
 gem 'devise'
 gem 'exifr'
 gem 'mini_magick'
@@ -81,3 +80,4 @@ gem 'rails-ujs'
 group :production do
   gem 'pg'
 end
+gem 'importmap-rails'
