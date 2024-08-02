@@ -1,24 +1,25 @@
 const path = require('path');
 
 module.exports = {
-  entry: {
-    app: './src/index.js'
-  },
+  entry: './src/index.js', // エントリーポイント
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'bundle.js', // 出力されるバンドルファイルの名前
+    path: path.resolve(__dirname, 'dist'), // 出力ディレクトリ
   },
-  mode: 'development', // or 'production'
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.js$/, // .jsファイルに対する処理
+        exclude: /node_modules/, // node_modulesディレクトリを除外
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+          loader: 'babel-loader', // Babelローダーを使用
+        },
+      },
+    ],
   },
-  devtool: 'source-map'
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'), // 開発サーバーのルートディレクトリ
+    compress: true,
+    port: 9000, // 開発サーバーのポート
+  },
 };
