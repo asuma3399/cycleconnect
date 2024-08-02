@@ -81,3 +81,4 @@ group :production do
   gem 'pg'
 end
 gem 'importmap-rails'
+gem "turbo-rails"
