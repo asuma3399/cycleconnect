@@ -134,17 +134,17 @@ meter {
 }
 
 .hero .background-image:nth-child(1) {
-  background-image: url('/assets/hero1.jpg');
+  background-image: url('/assets/images/hero1.jpg');
   animation-delay: 0s;
 }
 
 .hero .background-image:nth-child(2) {
-  background-image: url('/assets/hero2.jpg');
+  background-image: url('/assets/images/hero2.jpg');
   animation-delay: 4s;
 }
 
 .hero .background-image:nth-child(3) {
-  background-image: url('/assets/hero3.jpg');
+  background-image: url('/assets/images/hero3.jpg');
   animation-delay: 8s;
 }
 
