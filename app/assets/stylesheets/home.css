@@ -133,21 +133,6 @@ meter {
   animation: fade 12s infinite;
 }
 
-.hero .background-image:nth-child(1) {
-  background-image: url('/assets/hero1.jpg');
-  animation-delay: 0s;
-}
-
-.hero .background-image:nth-child(2) {
-  background-image: url('/assets/hero2.jpg');
-  animation-delay: 4s;
-}
-
-.hero .background-image:nth-child(3) {
-  background-image: url('/assets/hero3.jpg');
-  animation-delay: 8s;
-}
-
 @keyframes fade {
   0% { opacity: 0; }
   25% { opacity: 1; }
