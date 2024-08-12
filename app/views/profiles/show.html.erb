@@ -34,8 +34,10 @@
         <li><%= link_to event.title, chat_room_event_path(event.chat_room, event) %> - <%= event.date.strftime("%Y-%m-%d") %></li>
       <% end %>
     </ul>
-
-    <%= link_to 'Edit Profile', edit_profile_path, class: 'edit-profile-btn' %>
+    
+    <% if current_user == @user %>
+      <%= link_to 'Edit Profile', edit_profile_path, class: 'edit-profile-btn' %>
+    <% end %>
   </div>
 </body>
 </html>

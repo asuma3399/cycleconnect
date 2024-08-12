@@ -22,6 +22,9 @@ class ChatRoomsController < ApplicationController
   end
 
   def show
+    @chat_room = ChatRoom.find(params[:id])
+    @events = @chat_room.events # イベント一覧を表示する場合
+    @event = @events.first # 特定のイベントを表示する場合、正しいイベントを設定
     @messages = @chat_room.messages
   end
 

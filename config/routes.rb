@@ -8,12 +8,12 @@ Rails.application.routes.draw do
 
   resources :chat_rooms, only: [:index, :new, :create, :destroy, :show] do
     resources :messages, only: [:create]
-    resources :events, only: [:index, :show, :new, :create] do
+    resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       member do
         post 'participate'
         delete 'unparticipate'
       end
     end
   end
-  resource :profile, only: [:show, :edit, :update]
+  resources :profiles, only: [:show, :edit, :update]
 end

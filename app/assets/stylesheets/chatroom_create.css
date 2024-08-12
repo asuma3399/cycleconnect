@@ -111,10 +111,10 @@ meter {
 /* リセットCSS */
 
 body {
-  margin-top: 56px; 
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   color: #333;
+  padding-top: 60px;
 }
 
 h2 {
@@ -174,3 +174,23 @@ h2 {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+
+select[multiple] option:checked {
+  background-color: #007bff;
+  color: white;
+}
+
+select {
+  all: revert;
+}
+
+.field .user-checkboxes .checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.field .user-checkboxes .checkbox input[type="checkbox"] {
+  margin-right: 8px;
+}
+

@@ -152,6 +152,10 @@ body {
   color: #666;
 }
 
+.user-list {
+  display: flex;
+  align-items: center;
+}
 
 .user-info {
   display: flex;
@@ -168,6 +172,8 @@ body {
 .user-name {
   margin-right: 10px;
   height: 30px;
+  display: flex;
+  align-items: center; /* ユーザーネームを上下中央に配置 */
 }
 
 .messages {

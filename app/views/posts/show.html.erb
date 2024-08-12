@@ -20,7 +20,7 @@
           <% end %>
         </div>
         <div class="user-name">
-          <span class="user-name"><%= @post.user.username %></span>
+          <%= link_to @post.user.username, profile_path(@post.user), class: 'user-name' %>
         </div>
       </div>
 

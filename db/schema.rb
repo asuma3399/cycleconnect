@@ -69,10 +69,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
     t.text "description", null: false
     t.datetime "date", null: false
     t.bigint "chat_room_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "garmin_url"
     t.index ["chat_room_id"], name: "index_events_on_chat_room_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "events_users", id: false, charset: "utf8", force: :cascade do |t|
@@ -143,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "chat_rooms"
+  add_foreign_key "events", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "chat_rooms"

@@ -108,7 +108,6 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS */
 
 /* 基本的なページの背景とレイアウト */
@@ -132,7 +131,8 @@ body {
 
 h1 {
   text-align: center;
-  color: #333;
+  font-weight: bold;
+  font-size: 40px;
 }
 
 .form-group {

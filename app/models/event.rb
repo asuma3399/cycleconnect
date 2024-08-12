@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :chat_room
-  has_and_belongs_to_many :users
+  belongs_to :user  # イベントの作成者
+
   has_and_belongs_to_many :participants, class_name: 'User'
 
   validates :title, :description, :date, presence: true

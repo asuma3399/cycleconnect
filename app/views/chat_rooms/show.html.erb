@@ -11,8 +11,9 @@
   <div class="chat-room-details-container">
     <div class="chat-room-header">
       <h2><%= @chat_room.name %></h2>
-        <div class="user-info">
-          <ul>
+      <div class="user-info">
+        <ul>
+          <div class="user-list">
             <% @chat_room.users.each do |user| %>
               <% if user.icon.attached? %>
                 <%= image_tag user.icon, class: 'user-icon' %>
@@ -21,25 +22,14 @@
               <% end %>
               <span class="user-name"><%= user.username %></span>
             <% end %>
-          </ul>
-        </div>
-      <%= link_to 'Event', chat_room_events_path(@chat_room), class: 'btn btn-secondary' %> <!-- Eventボタン追加 -->
+          </div>
+        </ul>
+      </div>
     </div>
-    <div class="messages">
-      <% @messages.each do |message| %>
-        <div class="message">
-          <div class="message-user">
-            <%= message.user.username %>
-          </div>
-          <div class="message-content">
-            <%= message.content %>
-          </div>
-          <div class="message-timestamp">
-            <%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+
+    <!-- ここに他のイベント詳細情報を表示する部分を追加 -->
+      <%= link_to 'Event', chat_room_events_path(@chat_room), class: 'btn btn-secondary' %>
+
     <div class="chat-input-form">
       <%= form_with(model: [@chat_room, Message.new], local: true) do |f| %>
         <div class="field">
@@ -51,7 +41,7 @@
       <% end %>
     </div>
     <div class="chat-actions">
-      <%= link_to 'Delete Chat Room', chat_room_path(@chat_room), data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger delete-chat-room' %> <!-- 削除ボタンを右下に配置 -->
+      <%= link_to 'Delete Chat Room', chat_room_path(@chat_room), data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger delete-chat-room' %>
     </div>
   </div>
 </body>
