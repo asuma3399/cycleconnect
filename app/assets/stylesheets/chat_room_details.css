@@ -152,28 +152,28 @@ body {
   color: #666;
 }
 
+.user-details {
+  display: flex;
+}
+
 .user-list {
   display: flex;
   align-items: center;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
+  gap: 10px; /* ユーザーアイコンと名前の間にスペースを追加 */
 }
 
 .user-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-right: 10px;
+  flex-shrink: 0; /* アイコンのサイズを固定 */
 }
 
 .user-name {
-  margin-right: 10px;
-  height: 30px;
   display: flex;
-  align-items: center; /* ユーザーネームを上下中央に配置 */
+  align-items: center; /* ユーザー名を上下中央に配置 */
+  font-size: 16px;
+  color: #333;
 }
 
 .messages {
