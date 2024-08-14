@@ -12,19 +12,19 @@
     <%= form_with model: @user, url: profile_path, local: true do |f| %>
       <div class="field">
         <%= f.label :username, "Username" %>
-        <%= f.text_field :username, class: 'form-control' %>
+        <%= f.text_field :username, disabled: true, class: 'form-control' %>
       </div>
       <div class="field">
         <%= f.label :email, "Email" %>
-        <%= f.email_field :email, class: 'form-control' %>
+        <%= f.email_field :email, disabled: true, class: 'form-control' %>
       </div>
       <div class="field">
         <%= f.label :bio, "Bio" %>
-        <%= f.text_area :bio, class: 'form-control' %>
+        <%= f.text_area :bio, class: 'edit-form-control' %>
       </div>
       <div class="field">
         <%= f.label :icon, "Profile Icon" %>
-        <%= f.file_field :icon, class: 'form-control' %>
+        <%= f.file_field :icon, class: 'edit-form-control' %>
       </div>
       <div class="actions">
         <%= f.submit "Save changes", class: 'profile-edit-save-btn' %>

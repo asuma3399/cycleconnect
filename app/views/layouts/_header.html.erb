@@ -5,8 +5,19 @@
       <nav class="main-nav">
         <%= link_to "Gallery", posts_path, class: "nav-link" %>
         <%= link_to "Chat", chat_rooms_path, class: "nav-link" %>
-        <%= link_to "Profile", profile_path(current_user), class: "nav-link" %>
         <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+          <div class="header-user-info">
+            <div class="header-user-icon">
+              <% if current_user.icon.attached? %>
+                <%= image_tag post.user.icon, class: 'header-user-icon-img' %>
+              <% else %>
+                <%= image_tag 'default_user_icon.png', class: 'header-user-icon-img' %>
+              <% end %>
+            </div>
+            <div class="header-user-name">
+              <%= link_to current_user.username, profile_path(current_user), class: 'header-user-name' %>
+            </div>
+          </div>
       </nav>
     <% end %>
   </div>

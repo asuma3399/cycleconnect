@@ -108,7 +108,6 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS終わり */
 
 /* 基本的なスタイル */
@@ -247,6 +246,10 @@ body {
   text-align: right;
 }
 
+.actions {
+  margin-top: 10px;
+}
+
 .chat-actions .btn-danger {
   background-color: #dc3545;
   color: white;
@@ -262,6 +265,11 @@ body {
   background-color: #c82333;
 }
 
+.event-link {
+  text-align: center; /* 左右中央に配置 */
+  margin-top: 20px;   /* 上に少し余白を追加 */
+}
+
 .btn-secondary {
   background-color: #6c757d;
   color: white;
@@ -272,7 +280,7 @@ body {
   font-size: 14px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .btn-secondary:hover {

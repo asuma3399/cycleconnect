@@ -12,16 +12,24 @@ class ProfilesController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user == current_user && @user.update(user_params)
-      redirect_to profile_path(@user)
+  
+    original_username = @user.username
+    original_email = @user.email
+  
+    Rails.logger.debug("Updating user with params: #{user_params.inspect}")
+  
+    if @user.update(user_params)
+      @user.update_columns(username: original_username, email: original_email)
+      redirect_to profile_path, notice: 'プロフィールが更新されました。'
     else
-      render :edit, status: :unprocessable_entity
+      Rails.logger.debug("Errors: #{@user.errors.full_messages.join(", ")}")
+      render :edit
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :icon, :bio)
+    params.require(:user).permit(:bio, :icon)
   end
 end

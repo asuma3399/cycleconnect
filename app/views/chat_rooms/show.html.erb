@@ -29,6 +29,11 @@
       </div>
     </div>
 
+    <!-- イベント一覧へのリンクを追加 -->
+    <div class="event-link">
+      <%= link_to 'Event', chat_room_events_path(@chat_room), class: 'btn btn-secondary' %>
+    </div>
+
     <!-- メッセージ一覧を表示 -->
     <div class="messages">
       <% @chat_room.messages.each do |message| %>
@@ -46,7 +51,7 @@
           <div class="message-content">
             <%= message.content %>
           </div>
-          <div class="message-timestamp">
+          <div class="message-timestamp"> 
             <%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
           </div>
         </div>
