@@ -9,7 +9,7 @@
           <div class="header-user-info">
             <div class="header-user-icon">
               <% if current_user.icon.attached? %>
-                <%= image_tag current.user.icon, class: 'header-user-icon-img' %>
+                <%= image_tag current_user.icon, class: 'header-user-icon-img' %>
               <% else %>
                 <%= image_tag 'default_user_icon.png', class: 'header-user-icon-img' %>
               <% end %>
