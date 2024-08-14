@@ -15,21 +15,50 @@
         <ul>
           <div class="user-list">
             <% @chat_room.users.each do |user| %>
-              <% if user.icon.attached? %>
-                <%= image_tag user.icon, class: 'user-icon' %>
-              <% else %>
-                <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
-              <% end %>
-              <span class="user-name"><%= user.username %></span>
+              <div class="user-details">
+                <% if user.icon.attached? %>
+                  <%= image_tag user.icon, class: 'user-icon' %>
+                <% else %>
+                  <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
+                <% end %>
+                <span class="user-name"><%= user.username %></span>
+              </div>
             <% end %>
           </div>
         </ul>
       </div>
     </div>
 
-    <!-- ここに他のイベント詳細情報を表示する部分を追加 -->
+    <!-- イベント一覧へのリンクを追加 -->
+    <div class="event-link">
       <%= link_to 'Event', chat_room_events_path(@chat_room), class: 'btn btn-secondary' %>
+    </div>
 
+    <!-- メッセージ一覧を表示 -->
+    <div class="messages">
+      <% @chat_room.messages.each do |message| %>
+        <div class="message">
+          <div class="message-user">
+            <div class="user-details">
+              <% if message.user.icon.attached? %>
+                <%= image_tag message.user.icon, class: 'user-icon' %>
+              <% else %>
+                <%= image_tag 'default_user_icon.png', class: 'user-icon' %>
+              <% end %>
+              <span class="user-name"><%= message.user.username %></span>
+            </div>
+          </div>
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+          <div class="message-timestamp"> 
+            <%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- メッセージ送信フォーム -->
     <div class="chat-input-form">
       <%= form_with(model: [@chat_room, Message.new], local: true) do |f| %>
         <div class="field">
@@ -40,6 +69,7 @@
         </div>
       <% end %>
     </div>
+
     <div class="chat-actions">
       <%= link_to 'Delete Chat Room', chat_room_path(@chat_room), data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger delete-chat-room' %>
     </div>

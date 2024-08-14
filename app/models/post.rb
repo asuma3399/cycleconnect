@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   validates :description, presence: true
+  validates :image, presence: true
   validate :validate_image_type  # 画像タイプのバリデーションを追加
+  validates :latitude, presence: true
+  validates :longitude, presence: true
 
   belongs_to :user
   has_many :comments

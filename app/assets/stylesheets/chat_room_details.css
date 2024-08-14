@@ -108,7 +108,6 @@ meter {
 ::-webkit-details-marker {
   display: none;
 }
-
 /* リセットCSS終わり */
 
 /* 基本的なスタイル */
@@ -152,28 +151,28 @@ body {
   color: #666;
 }
 
+.user-details {
+  display: flex;
+}
+
 .user-list {
   display: flex;
   align-items: center;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
+  gap: 10px; /* ユーザーアイコンと名前の間にスペースを追加 */
 }
 
 .user-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-right: 10px;
+  flex-shrink: 0; /* アイコンのサイズを固定 */
 }
 
 .user-name {
-  margin-right: 10px;
-  height: 30px;
   display: flex;
-  align-items: center; /* ユーザーネームを上下中央に配置 */
+  align-items: center; /* ユーザー名を上下中央に配置 */
+  font-size: 16px;
+  color: #333;
 }
 
 .messages {
@@ -247,6 +246,10 @@ body {
   text-align: right;
 }
 
+.actions {
+  margin-top: 10px;
+}
+
 .chat-actions .btn-danger {
   background-color: #dc3545;
   color: white;
@@ -262,6 +265,11 @@ body {
   background-color: #c82333;
 }
 
+.event-link {
+  text-align: center; /* 左右中央に配置 */
+  margin-top: 20px;   /* 上に少し余白を追加 */
+}
+
 .btn-secondary {
   background-color: #6c757d;
   color: white;
@@ -272,7 +280,7 @@ body {
   font-size: 14px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .btn-secondary:hover {
