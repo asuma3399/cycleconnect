@@ -178,9 +178,14 @@ body {
   padding: 10px;
 }
 
-.header-user-icon {
-  width: 40px;
-  height: 40px;
+.header-user-icon-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.header-user-name {
+  margin-left: 5px;
 }
 
 .user-icon-img {
