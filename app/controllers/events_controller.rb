@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   def create
     @event = @chat_room.events.build(event_params)
-    @event.user = current_user  # ここでUserを設定する
+    @event.user_id = current_user.id
     if @event.save
       redirect_to chat_room_event_path(@chat_room, @event), notice: 'Event was successfully created.'
     else
