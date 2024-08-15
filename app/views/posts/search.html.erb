@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Gallery</title>
-  <%= stylesheet_link_tag 'post', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'post_search', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <div class="wrapper">
     <div class="container">
       <h1>Post Gallery</h1>
-      <div class="new-post-button-container">
-        <%= link_to 'New Post', new_post_path, class: 'new-post-button' %>
-      </div>
-
       <div class="search-container">
         <div class="search-box">
         <%= form_with(url: search_posts_path, local: true, method: :get, class: "search-form") do |form| %>

@@ -127,7 +127,7 @@ h1 {
 .search-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .search-box {

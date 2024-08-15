@@ -15,6 +15,14 @@ class Post < ApplicationRecord
     likes.where(user_id: user.id).exists?
   end
 
+  def self.search(search)
+    if search != ""
+      Post.where('description LIKE(?)', "%#{search}%")
+    else
+      Post.all
+    end
+  end
+
   private
 
   # 画像がJPEGまたはPNGのみであることを保証するバリデーションメソッド
