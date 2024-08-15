@@ -2,3 +2,12 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+
+ja:
+  activerecord:
+    errors:
+      models:
+        event:
+          attributes:
+            user:
+              required: "ユーザーを入力してください"

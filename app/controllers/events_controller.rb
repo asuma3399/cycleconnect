@@ -17,9 +17,9 @@ class EventsController < ApplicationController
 
   def create
     @event = @chat_room.events.build(event_params)
-    @event.user = current_user  # イベントの作成者として設定
+    @event.user = current_user  # ここでUserを設定する
     if @event.save
-      redirect_to chat_room_events_path(@chat_room)
+      redirect_to chat_room_event_path(@chat_room, @event), notice: 'Event was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,6 +29,8 @@ class EventsController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:id])
+    @event.user = current_user  # ここでUserを設定する、もし必要な場合
     if @event.update(event_params)
       redirect_to chat_room_event_path(@chat_room, @event), notice: 'Event was successfully updated.'
     else
