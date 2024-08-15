@@ -48,9 +48,12 @@
     <%= button_to '不参加', unparticipate_chat_room_event_path(@chat_room, @event), method: :delete, class: 'btn btn-danger' %>
   </div>
 <!-- イベントの作成者かどうかを確認 -->
+
+  <div class="edit-event-btn">
 <% if @event.participants.include?(current_user) %>
-  <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'btn btn-primary' %>
+  <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event) %>
 <% end %>
+  </div>
 
 </body>
 </html>

@@ -14,7 +14,7 @@
 <body>
   <div class="form-container">
     <h1>Create New Post</h1>
-    <%= form_with model: @post, local: true do |f| %>
+    <%= form_with model: @post, local: true, data: { turbo: false } do |f| %>
       <div class="field">
         <%= f.label :description, "Description" %>
         <%= f.text_area :description, class: 'form-control' %>
@@ -39,48 +39,48 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var map = L.map('map').setView([35.681236, 139.767125], 13); // 東京駅の緯度経度
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
+document.addEventListener("turbo:load", function() {
+  var map = L.map('map').setView([35.681236, 139.767125], 13); // 東京駅の緯度経度
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-      var marker;
+  var marker;
 
-      map.on('click', function(e) {
-        var coord = e.latlng;
-        var lat = coord.lat;
-        var lng = coord.lng;
-        if (marker) {
-          map.removeLayer(marker);
-        }
-        marker = L.marker([lat, lng]).addTo(map);
-        
-        document.getElementById('latitude').value = lat.toFixed(6);
-        document.getElementById('longitude').value = lng.toFixed(6);
-      });
+  map.on('click', function(e) {
+    var coord = e.latlng;
+    var lat = coord.lat;
+    var lng = coord.lng;
+    if (marker) {
+      map.removeLayer(marker);
+    }
+    marker = L.marker([lat, lng]).addTo(map);
+    
+    document.getElementById('latitude').value = lat.toFixed(6);
+    document.getElementById('longitude').value = lng.toFixed(6);
+  });
 
-      document.querySelector('input[type="file"]').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-          EXIF.getData(file, function() {
-            const lat = EXIF.getTag(this, 'GPSLatitude');
-            const lon = EXIF.getTag(this, 'GPSLongitude');
-            if (lat && lon) {
-              const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
-              const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
-              document.getElementById('latitude').value = latitude.toFixed(6);
-              document.getElementById('longitude').value = longitude.toFixed(6);
-              map.setView([latitude, longitude], 13);
-              if (marker) {
-                map.removeLayer(marker);
-              }
-              marker = L.marker([latitude, longitude]).addTo(map);
-            }
-          });
+  document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      EXIF.getData(file, function() {
+        const lat = EXIF.getTag(this, 'GPSLatitude');
+        const lon = EXIF.getTag(this, 'GPSLongitude');
+        if (lat && lon) {
+          const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
+          const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
+          document.getElementById('latitude').value = latitude.toFixed(6);
+          document.getElementById('longitude').value = longitude.toFixed(6);
+          map.setView([latitude, longitude], 13);
+          if (marker) {
+            map.removeLayer(marker);
+          }
+          marker = L.marker([latitude, longitude]).addTo(map);
         }
       });
-    });
+    }
+  });
+});
   </script>
 </body>
 </html>
