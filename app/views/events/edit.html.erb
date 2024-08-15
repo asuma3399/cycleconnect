@@ -7,6 +7,18 @@
   <%= stylesheet_link_tag 'event_edit', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
+
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-container">
     <h1>Edit Event</h1>
     <%= form_with model: [@chat_room, @event], local: true do |f| %>
