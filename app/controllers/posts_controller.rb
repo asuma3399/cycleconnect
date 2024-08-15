@@ -11,7 +11,9 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.search(params[:keyword]).order("created_at DESC")
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
   end
 
   def new
