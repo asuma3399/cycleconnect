@@ -11,27 +11,29 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.search(params[:keyword])
+    @posts = Post.search(params[:keyword]).order("created_at DESC")
   end
 
   def new
-    @post = Post.new
+    @post_form = PostForm.new
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    if params[:post][:image].present? && params[:post][:image].content_type == 'image/jpeg'
-      exif = EXIFR::JPEG.new(params[:post][:image].tempfile)
+    @post_form = PostForm.new(post_form_params)
+    @post_form.user_id = current_user.id
+
+    if params[:post_form][:image].present? && params[:post_form][:image].content_type == 'image/jpeg'
+      exif = EXIFR::JPEG.new(params[:post_form][:image].tempfile)
       if exif && exif.gps
-        @post.latitude = exif.gps.latitude
-        @post.longitude = exif.gps.longitude
+        @post_form.latitude = exif.gps.latitude
+        @post_form.longitude = exif.gps.longitude
       end
     end
 
-    if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+    if @post_form.save
+      redirect_to posts_path, notice: 'Post was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -43,7 +45,7 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:post).permit(:description, :image, :latitude, :longitude)
+  def post_form_params
+    params.require(:post_form).permit(:description, :garmin_url, :tag_name, :image, :latitude, :longitude)
   end
 end

@@ -44,6 +44,12 @@
       <%= @post.description %>
     </div>
 
+    <% if @post.tags.any? %>
+    <div class="tag-container">
+      <td># <%= @post.tags.first&.tag_name %></td>
+    </div>
+    <% end %>
+
     <!-- コメント一覧の追加 -->
     <% if @post.comments.any? %>
       <div class="comments-section">

@@ -218,6 +218,11 @@ body {
   background-color: #ff1a1a;
 }
 
+.tag-container {
+  margin-top: 10px;
+  color: #2575fc;
+}
+
 .comments-section {
   margin-top: 30px;
   background: #f9f9f9;
