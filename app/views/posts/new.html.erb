@@ -14,10 +14,14 @@
 <body>
   <div class="form-container">
     <h1>Create New Post</h1>
-    <%= form_with model: @post, local: true, data: { turbo: false } do |f| %>
+    <%= form_with model: @post_form, url: posts_path, method: :post, local: true, data: { turbo: false } do |f| %>
       <div class="field">
         <%= f.label :description, "Description" %>
         <%= f.text_area :description, class: 'form-control' %>
+      </div>
+      <div class="tag-field">
+        <%= f.label :tag_name, "Tags" %>
+        <%= f.text_field :tag_name, class: 'form-control' %>
       </div>
       <div class="field">
         <%= f.label :image, "Image" %>

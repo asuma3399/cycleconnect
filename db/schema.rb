@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_15_083127) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -103,6 +103,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "post_tag_relations", charset: "utf8", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_tag_relations_on_post_id"
+    t.index ["tag_id"], name: "index_post_tag_relations_on_tag_id"
+  end
+
   create_table "posts", charset: "utf8", force: :cascade do |t|
     t.string "latitude", null: false
     t.string "longitude", null: false
@@ -122,6 +131,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "tags", charset: "utf8", force: :cascade do |t|
+    t.string "tag_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_name"], name: "index_tags_on_tag_name", unique: true
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -150,6 +166,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_054059) do
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "post_tag_relations", "posts"
+  add_foreign_key "post_tag_relations", "tags"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
 end
