@@ -56,10 +56,23 @@
         <h2>Comments</h2>
         <% @post.comments.each do |comment| %>
           <div class="comment">
-            <p><strong><%= comment.user.username %>:</strong> <%= comment.text %></p>
+            <div class="user-info">
+            <div class="user-icon">
+              <% if @post.user.icon.attached? %>
+                <%= image_tag @post.user.icon, class: 'user-icon-img' %>
+              <% else %>
+                <%= image_tag 'default_user_icon.png', class: 'user-icon-img' %>
+              <% end %>
+            </div>
+            </div>
+            <div class="user-name-container">
+              <strong><%= comment.user.username %>:</strong> <%= comment.text %>
+            </div>
+            <div class="comment-delete-btn">
             <% if comment.user == current_user %>
               <%= link_to 'Delete', post_comment_path(@post, comment), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
             <% end %>
+            </div>
           </div>
         <% end %>
       </div>
@@ -91,27 +104,69 @@
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
-    document.addEventListener("turbo:load", function() {
-      const mapElement = document.getElementById('map');
-      if (mapElement) {
-        const latitude = parseFloat(mapElement.dataset.latitude);
-        const longitude = parseFloat(mapElement.dataset.longitude);
+const initializeMap = () => {
+  const mapElement = document.getElementById('map');
+  
+  if (mapElement) {
+    // 地図がすでに初期化されている場合、既存の地図を削除
+    if (window.map) {
+      window.map.remove();
+      window.map = null;
+    }
 
-        if (!isNaN(latitude) && !isNaN(longitude)) {
-          var map = L.map('map').setView([latitude, longitude], 13);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(map);
-          L.marker([latitude, longitude]).addTo(map)
-            .bindPopup('This is the location of the image.');
-        } else {
-          var map = L.map('map').setView([35.681236, 139.767125], 13); // 東京駅の緯度経度
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(map);
-        }
+    // 地図を初期化
+    const latitude = parseFloat(mapElement.dataset.latitude) || 35.681236; // 東京駅の緯度
+    const longitude = parseFloat(mapElement.dataset.longitude) || 139.767125; // 東京駅の経度
+    window.map = L.map('map').setView([latitude, longitude], 13); // 指定の緯度経度で地図を表示
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(window.map);
+
+    let marker;
+    if (!isNaN(latitude) && !isNaN(longitude) && mapElement.dataset.latitude && mapElement.dataset.longitude) {
+      marker = L.marker([latitude, longitude]).addTo(window.map)
+        .bindPopup('This is the location of the image.');
+    }
+
+    window.map.on('click', function(e) {
+      const coord = e.latlng;
+      const lat = coord.lat;
+      const lng = coord.lng;
+      if (marker) {
+        window.map.removeLayer(marker);
+      }
+      marker = L.marker([lat, lng]).addTo(window.map);
+
+      document.getElementById('latitude').value = lat.toFixed(6);
+      document.getElementById('longitude').value = lng.toFixed(6);
+    });
+
+    document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        EXIF.getData(file, function() {
+          const lat = EXIF.getTag(this, 'GPSLatitude');
+          const lon = EXIF.getTag(this, 'GPSLongitude');
+          if (lat && lon) {
+            const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
+            const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
+            document.getElementById('latitude').value = latitude.toFixed(6);
+            document.getElementById('longitude').value = longitude.toFixed(6);
+            window.map.setView([latitude, longitude], 13);
+            if (marker) {
+              window.map.removeLayer(marker);
+            }
+            marker = L.marker([latitude, longitude]).addTo(window.map);
+          }
+        });
       }
     });
+  }
+};
+
+// turbo:loadイベントで地図を初期化
+window.addEventListener("turbo:load", initializeMap);
+
   </script>
 </body>
 </html>
