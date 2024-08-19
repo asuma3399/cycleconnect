@@ -2,8 +2,10 @@
 # exit on error
 set -o errexit
 
-# OpenSSLのライブラリパスを設定
-export LD_LIBRARY_PATH=/home/linuxbrew/.linuxbrew/Cellar/openssl@3/3.3.1/lib:$LD_LIBRARY_PATH
+export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+export LD_LIBRARY_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib:$LD_LIBRARY_PATH"
 
 bundle install
 bundle exec rake assets:precompile
