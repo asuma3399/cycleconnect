@@ -301,6 +301,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   bootsnap
+  bundler (~> 2.4.22)
   capybara
   debug
   devise
@@ -332,4 +333,4 @@ RUBY VERSION
    ruby 3.2.0p0
 
 BUNDLED WITH
-   2.5.17
+   2.4.22

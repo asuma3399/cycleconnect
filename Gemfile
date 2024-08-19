@@ -86,3 +86,4 @@ group :production do
 end
 gem "aws-sdk-s3", require: false
 gem "gretel"
+gem 'bundler', '~> 2.4.22'
