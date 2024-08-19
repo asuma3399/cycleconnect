@@ -1,6 +1,3 @@
-require 'openssl'
-OpenSSL::Config.load_file("/home/linuxbrew/.linuxbrew/etc/openssl@3/openssl.cnf")
-
 require_relative "boot"
 
 require "rails/all"
