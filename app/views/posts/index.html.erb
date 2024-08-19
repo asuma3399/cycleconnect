@@ -15,14 +15,14 @@
       </div>
 
       <div class="search-container">
-        <div class="search-box">
         <%= form_with(url: search_posts_path, local: true, method: :get, class: "search-form") do |form| %>
-        <%= form.text_field :keyword, placeholder: "Search posts", class: "search-input" %>
-        </div>
-        <div class="search-btn">
-        <%= form.submit "Search", class: "post-search-btn" %>
-        </div>
-      <% end %>
+          <div class="search-box">
+            <%= form.text_field :keyword, placeholder: "Search posts", class: "search-input" %>
+          </div>
+          <div class="search-btn">
+            <%= form.submit "Search", class: "post-search-btn" %>
+          </div>
+        <% end %>
       </div>
 
       <div class="post-grid">

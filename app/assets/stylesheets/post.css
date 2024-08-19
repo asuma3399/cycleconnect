@@ -124,6 +124,11 @@ h1 {
   font-size: 50px;
 }
 
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
 .search-container {
   display: flex;
   justify-content: center;
