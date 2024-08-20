@@ -1,6 +1,7 @@
 # アプリケーション名
 CycleConnect
 # アプリケーション概要
+[![Image from Gyazo](https://i.gyazo.com/545b7c0c8b4b0735cf24fbdd4b4cb4dc.png)](https://gyazo.com/545b7c0c8b4b0735cf24fbdd4b4cb4dc)<br>
 ・サイクリングで撮影した写真を撮影地の位置情報付きでシェアをし、コミュニケーションをとる。<br>
 ・グループでチャットをしながらイベント企画機能でライドイベントを企画する
 # URL
