@@ -45,6 +45,7 @@ https://cycleconnect.onrender.com
 # 実装予定の機能
 1. ユーザーのフォロー機能
 2. グループチャットの参加者編集機能
+3. 複数枚画像投稿機能
 
 # データベース設計
 ![cycleconnect](https://github.com/user-attachments/assets/9d0af6b3-67e6-4237-b236-3e670f415641)
