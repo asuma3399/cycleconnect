@@ -49,14 +49,14 @@
   </div>
 <!-- イベントの作成者かどうかを確認 -->
 
+  <% if @event.user == current_user %>
   <div class="edit-event-btn">
-    <% if @event.user == current_user %>
-      <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'edit-event' %>
+    <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'edit-event' %>
   </div>
   <div class="delete-btn">
-      <%= link_to 'Delete Event', chat_room_event_path(@chat_room, @event), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-    <% end %>
+    <%= link_to 'Delete Event', chat_room_event_path(@chat_room, @event), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
   </div>
+  <% end %>
 
 </body>
 </html>
