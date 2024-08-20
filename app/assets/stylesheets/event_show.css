@@ -178,14 +178,18 @@ h3 {
 
 .edit-event-btn {
   display: flex;
-  justify-self: center;
-  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 40px;
   background-color: #007bff;
   color: white;
-  width: 100px;
   text-align: center;
   border-radius: 4px;
-  padding: 10px 10px;
   margin: 10px auto 0;
   font-size: 16px;
+}
+
+.delete-btn {
+  margin: 0 auto;
 }

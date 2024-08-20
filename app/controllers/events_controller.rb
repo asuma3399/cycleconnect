@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_chat_room
-  before_action :set_event, only: [:show, :edit, :update, :participate, :unparticipate]
+  before_action :set_event, only: [:show, :edit, :update, :participate, :unparticipate, :destroy]
 
   def index
     @events = @chat_room.events.order(date: :desc)
@@ -46,6 +46,14 @@ class EventsController < ApplicationController
   def unparticipate
     @event.participants.delete(current_user)
     redirect_to chat_room_event_path(@chat_room, @event)
+  end
+
+  def destroy
+    if @event.destroy
+      redirect_to chat_room_path(@chat_room), notice: 'Event was successfully deleted.'
+    else
+      redirect_to chat_room_event_path(@chat_room, @event), alert: 'Failed to delete the event.'
+    end
   end
 
   private

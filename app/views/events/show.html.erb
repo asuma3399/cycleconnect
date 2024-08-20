@@ -50,9 +50,12 @@
 <!-- イベントの作成者かどうかを確認 -->
 
   <div class="edit-event-btn">
-<% if @event.participants.include?(current_user) %>
-  <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event) %>
-<% end %>
+    <% if @event.user == current_user %>
+      <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'edit-event' %>
+  </div>
+  <div class="delete-btn">
+      <%= link_to 'Delete Event', chat_room_event_path(@chat_room, @event), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+    <% end %>
   </div>
 
 </body>

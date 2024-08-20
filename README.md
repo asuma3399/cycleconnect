@@ -19,16 +19,17 @@ https://cycleconnect.onrender.com
 1. トップページからユーザー新規登録を行う<br>
 2. Galleryページの新規写真投稿ボタンから、投稿の内容（写真の詳細、タグ、投稿する写真、緯度・経度）を入力し投稿する<br>
 ※写真に緯度・経度の情報が含まれている場合、緯度・経度の入力は不要<br>
-
+[![Image from Gyazo](https://i.gyazo.com/5708fad4a7888b070f83ffc426358c0f.gif)](https://gyazo.com/5708fad4a7888b070f83ffc426358c0f)
 ## 投稿された写真を確認する
 1. Galleryページから投稿された写真をクリックして、写真の詳細を確認する<br>
 2. 良いと思った投稿があれば、いいねボタンをクリックする<br>
 3. コメントしたい投稿があれば、コメント入力欄からコメントを投稿する
+[![Image from Gyazo](https://i.gyazo.com/1113fec92007165ecddf92313c289ff6.gif)](https://gyazo.com/1113fec92007165ecddf92313c289ff6)
 4. ユーザー名をクリックして、ユーザーのプロフィール（ユーザー名、自己紹介文、投稿写真（直近5枚）、参加予定のイベント（5回分））を確認する
-
+[![Image from Gyazo](https://i.gyazo.com/be96546bec04561be6830fdd5c90cbb0.gif)](https://gyazo.com/be96546bec04561be6830fdd5c90cbb0)
 ## グループ単位でチャットをする
 1. Chatページの新規チャットルーム作成ボタンから、チャットしたいユーザーを選択しチャットルームを作成する。
-
+[![Image from Gyazo](https://i.gyazo.com/d80b5461fc8489f442e4a12ad39203c5.gif)](https://gyazo.com/d80b5461fc8489f442e4a12ad39203c5)
 ## イベントを企画する
 1. チャットルームのイベントボタンをクリックし、チャットルームに属するイベント一覧を確認する
 2. イベント名をクリックしてイベントの詳細を確認する。イベントの参加・不参加をクリックして登録する。
