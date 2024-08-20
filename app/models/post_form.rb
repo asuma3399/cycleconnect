@@ -2,7 +2,7 @@ class PostForm
   include ActiveModel::Model
 
   attr_accessor( :id, :title, :description, :date, :chat_room_id, :user_id, :created_at,
-    :updated_at, :garmin_url, :tag_name, :image, :latitude, :longitude
+    :updated_at, :garmin_url, :tag_name, :image, :latitude, :longitude, :likes_count
   )
 
   validates :description, presence: true

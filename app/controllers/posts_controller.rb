@@ -43,8 +43,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    post = Post.find(params[:id])
+    @post_form = PostForm.new(post.attributes)
+    post.destroy
     redirect_to posts_path
   end
 
