@@ -31,12 +31,12 @@
         <img src="placeholder.jpg" alt="No image available" style="width: 100%; max-height: 500px; object-fit: cover;">
       <% end %>
     </div>
-    
+
     <div class="map-container" style="height: 400px; margin-top: 20px;">
-      <div id="map" data-latitude="<%= @post.latitude %>" data-longitude="<%= @post.longitude %>" style="height: 400px;"></div>
+      <div id="details-map" data-latitude="<%= @post.latitude %>" data-longitude="<%= @post.longitude %>" style="height: 400px;"></div>
     </div>
-    
-    <div id="like-btn<%= @post.id %>", class="like-btn">
+
+    <div id="like-btn<%= @post.id %>" class="like-btn">
       <%= render partial: "likes/like", locals: { post: @post } %>
     </div>
 
@@ -77,7 +77,7 @@
         <% end %>
       </div>
     <% end %>
-    
+
     <!-- コメントフォームの追加 -->
     <div class="comment-form">
       <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
@@ -101,72 +101,32 @@
     <% end %>
     </div>
 
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+const initializeDetailsMap = () => {
+  const mapElement = document.getElementById('details-map');
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script>
-const initializeMap = () => {
-  const mapElement = document.getElementById('map');
-  
   if (mapElement) {
-    // 地図がすでに初期化されている場合、既存の地図を削除
-    if (window.map) {
-      window.map.remove();
-      window.map = null;
+    if (window.detailsMap) {
+      window.detailsMap.remove();
     }
 
-    // 地図を初期化
-    const latitude = parseFloat(mapElement.dataset.latitude) || 35.681236; // 東京駅の緯度
-    const longitude = parseFloat(mapElement.dataset.longitude) || 139.767125; // 東京駅の経度
-    window.map = L.map('map').setView([latitude, longitude], 13); // 指定の緯度経度で地図を表示
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(window.map);
+    const latitude = parseFloat(mapElement.dataset.latitude);
+    const longitude = parseFloat(mapElement.dataset.longitude);
 
-    let marker;
-    if (!isNaN(latitude) && !isNaN(longitude) && mapElement.dataset.latitude && mapElement.dataset.longitude) {
-      marker = L.marker([latitude, longitude]).addTo(window.map)
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+      window.detailsMap = L.map(mapElement).setView([latitude, longitude], 13); // 指定の緯度経度で地図を表示
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(window.detailsMap);
+      L.marker([latitude, longitude]).addTo(window.detailsMap)
         .bindPopup('This is the location of the image.');
     }
-
-    window.map.on('click', function(e) {
-      const coord = e.latlng;
-      const lat = coord.lat;
-      const lng = coord.lng;
-      if (marker) {
-        window.map.removeLayer(marker);
-      }
-      marker = L.marker([lat, lng]).addTo(window.map);
-
-      document.getElementById('latitude').value = lat.toFixed(6);
-      document.getElementById('longitude').value = lng.toFixed(6);
-    });
-
-    document.querySelector('input[type="file"]').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        EXIF.getData(file, function() {
-          const lat = EXIF.getTag(this, 'GPSLatitude');
-          const lon = EXIF.getTag(this, 'GPSLongitude');
-          if (lat && lon) {
-            const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
-            const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
-            document.getElementById('latitude').value = latitude.toFixed(6);
-            document.getElementById('longitude').value = longitude.toFixed(6);
-            window.map.setView([latitude, longitude], 13);
-            if (marker) {
-              window.map.removeLayer(marker);
-            }
-            marker = L.marker([latitude, longitude]).addTo(window.map);
-          }
-        });
-      }
-    });
   }
 };
 
-// turbo:loadイベントで地図を初期化
-window.addEventListener("turbo:load", initializeMap);
-
-  </script>
+document.addEventListener("turbo:load", initializeDetailsMap);
+document.addEventListener("DOMContentLoaded", initializeDetailsMap);
+</script>
 </body>
 </html>

@@ -36,43 +36,52 @@
         <%= f.label :longitude, "Longitude" %>
         <%= f.text_field :longitude, class: 'form-control', id: 'longitude' %>
       </div>
-      <div id="map" style="height: 400px;"></div>
+      <div id="new-post-map" style="height: 400px;"></div>
       <div class="actions">
         <%= f.submit "Submit", class: 'post-submit-button' %>
       </div>
     <% end %>
   </div>
 
-  <script>
-const initializeMap = () => {
-  // 地図がすでに初期化されている場合、既存の地図を削除
-  if (window.map) {
-    window.map.remove();
-    window.map = null;
+<script>
+const initializeNewPostMap = () => {
+  const mapElement = document.getElementById('new-post-map');
+
+  if (!mapElement) return;
+
+  if (window.newPostMap) {
+    window.newPostMap.remove();
+    window.newPostMap = null;
   }
 
-  // 地図を初期化
-  window.map = L.map('map').setView([35.681236, 139.767125], 13); // 東京駅の緯度経度
+  window.newPostMap = L.map(mapElement).setView([35.681236, 139.767125], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-  }).addTo(window.map);
+  }).addTo(window.newPostMap);
 
   let marker;
+  const initialLat = parseFloat(document.getElementById('latitude').value);
+  const initialLng = parseFloat(document.getElementById('longitude').value);
 
-  window.map.on('click', function(e) {
-    var coord = e.latlng;
-    var lat = coord.lat;
-    var lng = coord.lng;
+  if (!isNaN(initialLat) && !isNaN(initialLng)) {
+    marker = L.marker([initialLat, initialLng]).addTo(window.newPostMap);
+    window.newPostMap.setView([initialLat, initialLng], 13);
+  } else {
+    marker = L.marker([35.681236, 139.767125]).addTo(window.newPostMap);
+  }
+
+  window.newPostMap.on('click', function (e) {
+    const coord = e.latlng;
     if (marker) {
-      window.map.removeLayer(marker);
+      marker.setLatLng(coord);
+    } else {
+      marker = L.marker(coord).addTo(window.newPostMap);
     }
-    marker = L.marker([lat, lng]).addTo(window.map);
-
-    document.getElementById('latitude').value = lat.toFixed(6);
-    document.getElementById('longitude').value = lng.toFixed(6);
+    document.getElementById('latitude').value = coord.lat.toFixed(6);
+    document.getElementById('longitude').value = coord.lng.toFixed(6);
   });
 
-  document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+  document.querySelector('input[type="file"]').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
       EXIF.getData(file, function() {
@@ -83,19 +92,20 @@ const initializeMap = () => {
           const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
           document.getElementById('latitude').value = latitude.toFixed(6);
           document.getElementById('longitude').value = longitude.toFixed(6);
-          window.map.setView([latitude, longitude], 13);
+          window.newPostMap.setView([latitude, longitude], 13);
           if (marker) {
-            window.map.removeLayer(marker);
+            marker.setLatLng([latitude, longitude]);
+          } else {
+            marker = L.marker([latitude, longitude]).addTo(window.newPostMap);
           }
-          marker = L.marker([latitude, longitude]).addTo(window.map);
         }
       });
     }
   });
 };
 
-// turbo:loadイベントで地図を初期化
-window.addEventListener("turbo:load", initializeMap);
-  </script>
+document.addEventListener("turbo:load", initializeNewPostMap);
+document.addEventListener("DOMContentLoaded", initializeNewPostMap);
+</script>
 </body>
 </html>
