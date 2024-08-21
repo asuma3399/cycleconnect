@@ -59,15 +59,27 @@ const initializeNewPostMap = () => {
     attribution: '© OpenStreetMap contributors'
   }).addTo(window.newPostMap);
 
+  // マーカーがキャッシュされないようにするためのコード
+  const markerOptions = {
+    icon: L.icon({
+      iconUrl: 'path/to/marker-icon.png' + '?v=' + new Date().getTime(),
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowUrl: 'path/to/marker-shadow.png',
+      shadowSize: [41, 41]
+    })
+  };
+
   let marker;
   const initialLat = parseFloat(document.getElementById('latitude').value);
   const initialLng = parseFloat(document.getElementById('longitude').value);
 
   if (!isNaN(initialLat) && !isNaN(initialLng)) {
-    marker = L.marker([initialLat, initialLng]).addTo(window.newPostMap);
+    marker = L.marker([initialLat, initialLng], markerOptions).addTo(window.newPostMap);
     window.newPostMap.setView([initialLat, initialLng], 13);
   } else {
-    marker = L.marker([35.681236, 139.767125]).addTo(window.newPostMap);
+    marker = L.marker([35.681236, 139.767125], markerOptions).addTo(window.newPostMap);
   }
 
   window.newPostMap.on('click', function (e) {
@@ -75,7 +87,7 @@ const initializeNewPostMap = () => {
     if (marker) {
       marker.setLatLng(coord);
     } else {
-      marker = L.marker(coord).addTo(window.newPostMap);
+      marker = L.marker(coord, markerOptions).addTo(window.newPostMap);
     }
     document.getElementById('latitude').value = coord.lat.toFixed(6);
     document.getElementById('longitude').value = coord.lng.toFixed(6);
@@ -96,7 +108,7 @@ const initializeNewPostMap = () => {
           if (marker) {
             marker.setLatLng([latitude, longitude]);
           } else {
-            marker = L.marker([latitude, longitude]).addTo(window.newPostMap);
+            marker = L.marker([latitude, longitude], markerOptions).addTo(window.newPostMap);
           }
         }
       });

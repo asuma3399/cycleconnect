@@ -71,7 +71,6 @@ https://cycleconnect.onrender.com
 % git clone https://github.com/asuma3399/cycleconnect.git<br>
 % cd cycleconnect<br>
 % bundle install<br>
-% yarn install
 
 # 工夫したポイント
 1. 投稿する写真データに位置情報が含まれていれば、緯度と経度を抜き出して自動的に地図上に表示させるようにした。
