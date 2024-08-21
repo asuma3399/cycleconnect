@@ -11,11 +11,8 @@
     <h1><%= @event.title %></h1>
     <p><strong>Date:</strong> <%= @event.date.strftime("%Y-%m-%d") %></p>
     <p><strong>Description:</strong> <%= @event.description %></p>
-    <% if @event.garmin_url.present? %>
-      <p><strong>Garmin URL:</strong> <%= link_to @event.garmin_url, @event.garmin_url, target: "_blank" %></p>
-    <% end %>
     <p><strong>Participants:</strong> <%= @participants.count %></p>
-  
+
     <h3>Participants</h3>
     <ul class="participant-list">
       <% @participants.each do |participant| %>
@@ -46,16 +43,19 @@
 
     <%= button_to '参加する', participate_chat_room_event_path(@chat_room, @event), method: :post, class: 'btn btn-primary' %>
     <%= button_to '不参加', unparticipate_chat_room_event_path(@chat_room, @event), method: :delete, class: 'btn btn-danger' %>
-  </div>
-<!-- イベントの作成者かどうかを確認 -->
 
+    <%= sanitize(@event.garmin_url, tags: %w(iframe), attributes: %w(src width height frameborder)) %>
+
+  </div>
+
+  <!-- イベントの作成者かどうかを確認 -->
   <% if @event.user == current_user %>
-  <div class="edit-event-btn">
-    <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'edit-event' %>
-  </div>
-  <div class="delete-btn">
-    <%= link_to 'Delete Event', chat_room_event_path(@chat_room, @event), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-  </div>
+    <div class="edit-event-btn">
+      <%= link_to 'Edit Event', edit_chat_room_event_path(@chat_room, @event), class: 'edit-event' %>
+    </div>
+    <div class="delete-btn">
+      <%= link_to 'Delete Event', chat_room_event_path(@chat_room, @event), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+    </div>
   <% end %>
 
 </body>
