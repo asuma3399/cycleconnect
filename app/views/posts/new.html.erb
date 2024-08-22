@@ -44,80 +44,80 @@
   </div>
 
 <script>
-const initializeNewPostMap = () => {
-  const mapElement = document.getElementById('new-post-map');
+  const initializeNewPostMap = () => {
+    const mapElement = document.getElementById('new-post-map');
 
-  if (!mapElement) return;
+    if (!mapElement) return;
 
-  if (window.newPostMap) {
-    window.newPostMap.remove();
-    window.newPostMap = null;
-  }
+    if (window.newPostMap) {
+      window.newPostMap.remove();
+      window.newPostMap = null;
+    }
 
-  window.newPostMap = L.map(mapElement).setView([35.681236, 139.767125], 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(window.newPostMap);
+    window.newPostMap = L.map(mapElement).setView([35.681236, 139.767125], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(window.newPostMap);
 
-  // マーカーがキャッシュされないようにするためのコード
-  const markerOptions = {
-    icon: L.icon({
-      iconUrl: 'path/to/marker-icon.png' + '?v=' + new Date().getTime(),
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowUrl: 'path/to/marker-shadow.png',
-      shadowSize: [41, 41]
-    })
+    const markerOptions = {
+      icon: L.icon({
+        iconUrl: '/assets/marker-icon.png', // 正しい画像パスに置き換える
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: '/assets/marker-shadow.png', // 正しい画像パスに置き換える
+        shadowSize: [41, 41]
+      })
+    };
+
+    let marker;
+    const initialLat = parseFloat(document.getElementById('latitude').value);
+    const initialLng = parseFloat(document.getElementById('longitude').value);
+
+    if (!isNaN(initialLat) && !isNaN(initialLng)) {
+      marker = L.marker([initialLat, initialLng], markerOptions).addTo(window.newPostMap);
+      window.newPostMap.setView([initialLat, initialLng], 13);
+    } else {
+      marker = L.marker([35.681236, 139.767125], markerOptions).addTo(window.newPostMap);
+    }
+
+    window.newPostMap.on('click', function (e) {
+      const coord = e.latlng;
+      if (marker) {
+        marker.setLatLng(coord);
+      } else {
+        marker = L.marker(coord, markerOptions).addTo(window.newPostMap);
+      }
+      document.getElementById('latitude').value = coord.lat.toFixed(6);
+      document.getElementById('longitude').value = coord.lng.toFixed(6);
+    });
+
+    document.querySelector('input[type="file"]').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        EXIF.getData(file, function() {
+          const lat = EXIF.getTag(this, 'GPSLatitude');
+          const lon = EXIF.getTag(this, 'GPSLongitude');
+          if (lat && lon) {
+            const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
+            const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
+            document.getElementById('latitude').value = latitude.toFixed(6);
+            document.getElementById('longitude').value = longitude.toFixed(6);
+            window.newPostMap.setView([latitude, longitude], 13);
+            if (marker) {
+              marker.setLatLng([latitude, longitude]);
+            } else {
+              marker = L.marker([latitude, longitude], markerOptions).addTo(window.newPostMap);
+            }
+          }
+        });
+      }
+    });
   };
 
-  let marker;
-  const initialLat = parseFloat(document.getElementById('latitude').value);
-  const initialLng = parseFloat(document.getElementById('longitude').value);
+  document.addEventListener("turbo:load", initializeNewPostMap);
+  document.addEventListener("DOMContentLoaded", initializeNewPostMap);
 
-  if (!isNaN(initialLat) && !isNaN(initialLng)) {
-    marker = L.marker([initialLat, initialLng], markerOptions).addTo(window.newPostMap);
-    window.newPostMap.setView([initialLat, initialLng], 13);
-  } else {
-    marker = L.marker([35.681236, 139.767125], markerOptions).addTo(window.newPostMap);
-  }
-
-  window.newPostMap.on('click', function (e) {
-    const coord = e.latlng;
-    if (marker) {
-      marker.setLatLng(coord);
-    } else {
-      marker = L.marker(coord, markerOptions).addTo(window.newPostMap);
-    }
-    document.getElementById('latitude').value = coord.lat.toFixed(6);
-    document.getElementById('longitude').value = coord.lng.toFixed(6);
-  });
-
-  document.querySelector('input[type="file"]').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      EXIF.getData(file, function() {
-        const lat = EXIF.getTag(this, 'GPSLatitude');
-        const lon = EXIF.getTag(this, 'GPSLongitude');
-        if (lat && lon) {
-          const latitude = lat[0] + lat[1]/60 + lat[2]/3600;
-          const longitude = lon[0] + lon[1]/60 + lon[2]/3600;
-          document.getElementById('latitude').value = latitude.toFixed(6);
-          document.getElementById('longitude').value = longitude.toFixed(6);
-          window.newPostMap.setView([latitude, longitude], 13);
-          if (marker) {
-            marker.setLatLng([latitude, longitude]);
-          } else {
-            marker = L.marker([latitude, longitude], markerOptions).addTo(window.newPostMap);
-          }
-        }
-      });
-    }
-  });
-};
-
-document.addEventListener("turbo:load", initializeNewPostMap);
-document.addEventListener("DOMContentLoaded", initializeNewPostMap);
 </script>
 </body>
 </html>
